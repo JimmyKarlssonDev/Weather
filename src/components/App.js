@@ -17,18 +17,18 @@ function convertKelvinToCelsius(kelvin) {
 }
 
 const DayWeather = props => (                         
-  <div className="weather-day">
-  <div className="week-day" >  
-    <div className="day">{getDayOfWeek(props.date)}</div>
-    <div className="weatherImg">
-      <img src={`https://openweathermap.org/img/w/${props.weather[0].icon}.png`}/>
-    </div>
-    <div className="temps">   
-      <div className="highTemp">{`${convertKelvinToCelsius(props.temps.temp_max)} °C`}</div>
-      <div className="lowTemp">{`${convertKelvinToCelsius(props.temps.temp_min)} °C`}</div>
-    </div>
-  </div> 
-</div>                                  
+  <div onClick={() => console.log(getDayOfWeek(props.date))} className="weather-day">
+    <div className="week-day" >  
+      <div className="day">{getDayOfWeek(props.date)}</div>
+      <div className="weatherImg">
+        <img src={`https://openweathermap.org/img/w/${props.weather[0].icon}.png`}/>
+      </div>
+      <div className="temps">   
+        <div className="highTemp">{`${convertKelvinToCelsius(props.temps.temp_max)} °C`}</div>
+        <div className="lowTemp">{`${convertKelvinToCelsius(props.temps.temp_min)} °C`}</div>
+      </div>
+    </div> 
+  </div>                                  
 )
 
 export function App({ initialData }) {  
