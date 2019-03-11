@@ -31,10 +31,16 @@ const DayWeather = props => (
 </div>                                  
 )
 
+const doSearch = () => {
+  console.log('CLICK')
+}
+
 export function App({ initialData }) {  
+  console.log('test')
   const data = repository  
   return (
     <div>      
+      <button onClick={ () => doSearch()}>Search</button>
       <div className="foreCast">      
      {data.list.map(p =>      
           <DayWeather
