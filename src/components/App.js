@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import WeatherData from "../Repository";
+const http = require('axios');
  
 
 function getDayOfWeek(date) {  
@@ -34,7 +35,17 @@ const DayWeather = props => (
 export function App({ initialData }) {  
   const [wd, setWd] = useState([])
   const doSearch = (input) => {  
-    setWd(WeatherData.list);
+  console.log(WeatherData)
+  setWd(WeatherData.list)
+ /*  let url = `http://api.openweathermap.org/data/2.5/forecast?q=${input},us&mode=json&APPID=5abf3bbb00199842f7dd9cdeedfe56f0`
+  http.get(url)
+    .then(function(resp){
+      console.log('setWd')
+      setWd(resp.data.list)
+    })
+    .catch(function(error){
+      console.log(error)
+    }) */
   }
   
 
