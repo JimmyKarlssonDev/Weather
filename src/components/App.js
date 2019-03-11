@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import repository from "../Repository";
+import WeatherData from "../Repository";
  
 
 function getDayOfWeek(date) {  
@@ -31,18 +31,20 @@ const DayWeather = props => (
 </div>                                  
 )
 
-const doSearch = () => {
-  console.log('CLICK')
-}
-
 export function App({ initialData }) {  
-  console.log('test')
-  const data = repository  
+  const [wd, setWd] = useState([])
+  const doSearch = (input) => {  
+    setWd(WeatherData.list);
+  }
+  
+
+  console.log('rendering page...')
   return (
-    <div>      
-      <button onClick={ () => doSearch()}>Search</button>
+    <div>   
+      <input id="search-input"></input>   
+      <button onClick={ () => doSearch(document.getElementById("search-input").value)}>Search</button>
       <div className="foreCast">      
-     {data.list.map(p =>      
+     {wd.map(p =>      
           <DayWeather
             weather={p.weather}
             temps={p.main}
