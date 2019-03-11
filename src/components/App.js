@@ -4,7 +4,6 @@ const http = require('axios');
  
 
 function getDayOfWeek(date) {  
-  console.log(date);
   var dayOfWeek = new Date(date).getDay();    
   return isNaN(dayOfWeek) ? null : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][dayOfWeek];
 }
@@ -35,7 +34,6 @@ const DayWeather = props => (
 export function App({ initialData }) {  
   const [wd, setWd] = useState([])
   const doSearch = (input) => {  
-  console.log(WeatherData)
   setWd(WeatherData.list)
  /*  let url = `http://api.openweathermap.org/data/2.5/forecast?q=${input},us&mode=json&APPID=5abf3bbb00199842f7dd9cdeedfe56f0`
   http.get(url)
@@ -57,6 +55,7 @@ export function App({ initialData }) {
       <div className="foreCast">      
      {wd.map(p =>      
           <DayWeather
+            key={p.dt}
             weather={p.weather}
             temps={p.main}
             date={p.dt_txt}
