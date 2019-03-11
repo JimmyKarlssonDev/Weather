@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import repository from "../Repository";
 
-const  weeKdays = {
-  "Mon" : "Monday",
-  "Tue" : "Tuesday",
-  "Wed" : "Wednesday",
-  "Thu" : "Thursday",
-  "Fri" : "Friday"
+function getDayOfWeek(date) {  
+  console.log(date);
+  var dayOfWeek = new Date(date).getDay();    
+  console.log(dayOfWeek);
+  return isNaN(dayOfWeek) ? null : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayOfWeek];
 }
 
-const DayWeather = props => 
-(
+const DayWeather = props => ( 
   <div className="weather-day">
-  <div className="week-day">
-    <div className="day">Mon</div>
+  <div className="week-day">  
+    <div className="day">{getDayOfWeek(props.date)}</div>
     <div className="weatherImg">IMG</div>
     <div className="temps">   
       <div className="highTemp">{props.temps.temp_max}</div>
@@ -29,10 +27,12 @@ export function App({ initialData }) {
   return (
     <div>      
       <div className="5-foreCast">      
-     { data.list.map(p => 
+     {data.list.map(p => 
+     
           <DayWeather
             weather={p.weather}
             temps={p.main}
+            date={p.dt_txt}
           />
         )};
       
