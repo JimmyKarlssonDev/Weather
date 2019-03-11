@@ -8,36 +8,41 @@ function getDayOfWeek(date) {
   return isNaN(dayOfWeek) ? null : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][dayOfWeek];
 }
 
+function convertKelvinToCelsius(kelvin) {
+	if (kelvin < (0)) {
+		return 'below absolute zero (0 K)';
+	} else {
+		return Math.round((kelvin-273.15));
+	}
+}
+
+
 const DayWeather = props => ( 
   <div className="weather-day">
   <div className="week-day">  
     <div className="day">{getDayOfWeek(props.date)}</div>
     <div className="weatherImg">IMG</div>
     <div className="temps">   
-      <div className="highTemp">{props.temps.temp_max}</div>
-      <div className="lowTemp">{props.temps.temp_min}</div>
+      <div className="highTemp">{`${convertKelvinToCelsius(props.temps.temp_max)} °C`}</div>
+      <div className="lowTemp">{`${convertKelvinToCelsius(props.temps.temp_min)} °C`}</div>
     </div>
   </div> 
 </div>                                  
 )
 
 export function App({ initialData }) {  
-  const data = repository
-  
+  const data = repository  
   return (
     <div>      
       <div className="5-foreCast">      
-     {data.list.map(p => 
-     
+     {data.list.map(p =>      
           <DayWeather
             weather={p.weather}
             temps={p.main}
             date={p.dt_txt}
           />
-        )};
-      
+        )};    
      </div>
     </div>
   )
-
 }
