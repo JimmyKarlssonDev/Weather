@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
 
+const  weeKdays = {
+  "Mon" : "Monday",
+  "Tue" : "Tuesday",
+  "Wed" : "Wednesday",
+  "Thu" : "Thursday",
+  "Fri" : "Friday"
+}
+const DayWeather = props => (
+  <div className="weather-day">
+  <div className="week-day">
+    <div className="day">Mon</div>
+    <div className="weatherImg">IMG</div>
+    <div className="temps">   
+      <div className="highTemp">15</div>
+      <div className="lowTemp">25</div>
+    </div>
+  </div>
+</div>
+)
+
 export function App({ initialData }) {
-  const [count, setCount] = useState(0);
   return (
     <div>
-      <h1>{initialData.appName}</h1>
-      This is a sample stateful and server-side rendered React application.
-      <br />
-      <br />
-      Here is a button that will track how many times you click it:
-      <br />
-      <br />
-      <button onClick={() => setCount(count + 1)}>{count}</button>
+      <div className="5-foreCast">      
+      <DayWeather />
+     </div>
     </div>
   );
+
 }
