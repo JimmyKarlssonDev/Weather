@@ -44,19 +44,18 @@ export function App({ initialData }) {
     .catch(function(error){
       console.log(error)
     }) */
-  }
-  
-
-  console.log('rendering page...')
+  } 
+ 
   return (
-    <div>   
+    <div>              
       <input id="search-input"></input>   
       <button onClick={ () => doSearch(document.getElementById("search-input").value)}>Search</button>
       <div className="foreCast">      
-     {wd.map(p =>      
+      {wd.filter(a=>a.dt_txt.includes("12:00:00")).map(p =>      
           <DayWeather
             key={p.dt}
             weather={p.weather}
+            hourlyWeather={wd}
             temps={p.main}
             date={p.dt_txt}
           />
