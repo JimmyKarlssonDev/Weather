@@ -69,6 +69,7 @@ export function App({ initialData }) {
     .then(function(resp){      
       setWd(resp.data.list)
       setCity(resp.data.city.name)
+      setHrForecast([])
     })
     .catch(function(error){
       console.log(error) 
