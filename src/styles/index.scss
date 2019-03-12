@@ -3,20 +3,13 @@
   padding-right: 2px;   
   padding-top: 2px;
   padding-bottom: 2px;
- /*  margin-left: 5px; */
   width: 50px;
   font-family: "Calibri";
-/*     border-style: solid;
-  border-width: 1px; */
 }
 
 .weather-container{ 
   width: 500px;
-  font-family: "Calibri";
-/*   border-style: solid;
-  border-width: 1px; */
-
-  
+  font-family: "Calibri";  
 }
 input[type=text]{
   border:2px solid #aaa;
@@ -34,27 +27,14 @@ input[type=text]:focus{
 }
 
 .hour-weather{
-
-  margin-top: 10px;
-/*   border-width: 1px;
-  border-style: solid */
-  
+  margin-top: 10px;  
 }
 
 .hourly-weather{
-     
-/*   padding-left: 2px;  
-  padding-top: 2px;
-  padding-bottom: 2px;
-  margin-left: 5px; */
   margin-top: 10px;
   width: 100px;
   font-family: "Calibri";
-/*   border-style: solid;
-  border-width: 1px; */
 }
-
-
 
 .highTemp{
   background-color: darkgrey;
@@ -80,9 +60,6 @@ input[type=text]:focus{
 }
 
 .myButton {
-/* 	-moz-box-shadow: 3px 4px 0px 0px #899599;
-	-webkit-box-shadow: 3px 4px 0px 0px #899599;
-	box-shadow: 3px 4px 0px 0px #899599; */
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #bab1ba));
 	background:-moz-linear-gradient(top, #ededed 5%, #bab1ba 100%);
 	background:-webkit-linear-gradient(top, #ededed 5%, #bab1ba 100%);
@@ -91,9 +68,6 @@ input[type=text]:focus{
 	background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#bab1ba',GradientType=0);
 	background-color:#ededed;
-/* 	-moz-border-radius:15px;
-	-webkit-border-radius:15px;
-	border-radius:15px; */
 	border:1px solid #d6bcd6;
 	display:inline-block;
 	cursor:pointer;
@@ -119,4 +93,7 @@ input[type=text]:focus{
 	top:1px;
 }
 
+.body{
+  background-color: sandybrown
+}
 

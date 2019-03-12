@@ -63,6 +63,7 @@ export function App({ initialData }) {
   const [hrForecast, setHrForecast] = useState([]);
   const [city, setCity] = useState('');
   const [wd, setWd] = useState([])
+  const [httpError, setHttpError] = useState()
   const doSearch = (input) => {    
   let url = `http://api.openweathermap.org/data/2.5/forecast?q=${input},us&mode=json&APPID=5abf3bbb00199842f7dd9cdeedfe56f0`
   http.get(url)
@@ -70,9 +71,10 @@ export function App({ initialData }) {
       setWd(resp.data.list)
       setCity(resp.data.city.name)
       setHrForecast([])
+      setHttpError()
     })
     .catch(function(error){
-      console.log(error) 
+      setHttpError(error.response.status)
     })
   } 
   function setStuff(selectedDate){
@@ -84,7 +86,11 @@ export function App({ initialData }) {
   return (
     <div className="main">             
       <input type="text" placeholder="City..." id="search-input"></input>   
+     
       <a href="#"  onClick={ () => doSearch(document.getElementById("search-input").value)} className="myButton">Search</a>  
+      <div>
+        <p>{httpError}</p>                 
+      </div>
       <div className="foreCast">      
       {wd.filter(a=>a.dt_txt.includes("12:00:00")).map(p =>      
           <DayWeather
