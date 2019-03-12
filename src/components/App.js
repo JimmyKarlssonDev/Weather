@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import WeatherData from "../Repository";
 const http = require('axios');
- 
 
 function getDayOfWeek(date) {  
   var dayOfWeek = new Date(date).getDay();    
@@ -16,13 +15,12 @@ function convertKelvinToCelsius(kelvin) {
 	}
 }
 
-
 const HourlyWeather = props =>{  
   return (  
-      <div className="hour-weather-container" style={{width: "300px"}}>
+      <div className="hour-weather-container" style={{width: "170px"}}>
      {props.hourlyForecast.map(p =>    
         <div className="hour-weather">        
-          <div className="day" style={{display: "inline-block", width: "100%"}}>{`${p.dt_txt}`}</div>
+          <div className="day">{`${p.dt_txt}`}</div>
           <div className="weatherImg">
             <img src={`https://openweathermap.org/img/w/${p.weather[0].icon}.png`}/>
           </div>
@@ -36,13 +34,11 @@ const HourlyWeather = props =>{
 }
 
 const HourlyForecastHeader = props => {
-
+  if(!props.searchedCity) return(<div></div>)
   return (
-      <div>{`Hourly forecast in ${props.city}`}</div>
+      <div>{`Hourly forecast in ${props.searchedCity}`}</div>
   )
-
 }
-
 
 const DayWeather = props => 
 {
@@ -66,9 +62,10 @@ const DayWeather = props =>
 
 export function App({ initialData }) {  
   const [hrForecast, setHrForecast] = useState([]);
+  const [city, setCity] = useState('');
   const [wd, setWd] = useState([])
   const doSearch = (input) => {  
-  setWd(WeatherData.list)
+  setWd(WeatherData.list, input)
  /*  let url = `http://api.openweathermap.org/data/2.5/forecast?q=${input},us&mode=json&APPID=5abf3bbb00199842f7dd9cdeedfe56f0`
   http.get(url)
     .then(function(resp){
@@ -81,15 +78,15 @@ export function App({ initialData }) {
   } 
   function setStuff(selectedDate){
     let date = new Date(selectedDate)
-
     //Weird
     let dateString = `${date.getFullYear()}-0${date.getMonth()+1}-${date.getDate()}`    
+    setCity(document.getElementById("search-input").value)
     setHrForecast(wd.filter(a => a.dt_txt.includes(dateString)))    
   }
   return (
-    <div >              
-      <input id="search-input"></input>   
-      <button onClick={ () => doSearch(document.getElementById("search-input").value)}>Search</button>
+    <div className="main">             
+      <input type="text" placeholder="City..." id="search-input"></input>   
+      <a href="#"  onClick={ () => doSearch(document.getElementById("search-input").value)} className="myButton">Search</a>  
       <div className="foreCast">      
       {wd.filter(a=>a.dt_txt.includes("12:00:00")).map(p =>      
           <DayWeather
@@ -102,9 +99,9 @@ export function App({ initialData }) {
           />
         )}
      </div>
-     <div>
+     <div>    
        <HourlyForecastHeader 
-        city={'London'}
+        searchedCity={city}
        />
      </div>
      <div className="hourlyForecast">
