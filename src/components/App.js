@@ -16,22 +16,44 @@ function convertKelvinToCelsius(kelvin) {
 	}
 }
 
-const DayWeather = props => (                         
-  <div onClick={() => console.log(getDayOfWeek(props.date))} className="weather-day">
-    <div className="week-day" >  
-      <div className="day">{getDayOfWeek(props.date)}</div>
-      <div className="weatherImg">
-        <img src={`https://openweathermap.org/img/w/${props.weather[0].icon}.png`}/>
+
+const HourlyWeather = props =>{  
+  return (  
+      <div>
+     { props.hourlyForecast.map(p =>    
+        <div >
+         <div>{getDayOfWeek(p.date)}</div>
+          <div>{`${convertKelvinToCelsius(p.main.temp_max)} °C`}</div>
+          <div>{`${convertKelvinToCelsius(p.main.temp_min)} °C`}</div>
+        </div>               
+      ) }
       </div>
-      <div className="temps">   
-        <div className="highTemp">{`${convertKelvinToCelsius(props.temps.temp_max)} °C`}</div>
-        <div className="lowTemp">{`${convertKelvinToCelsius(props.temps.temp_min)} °C`}</div>
-      </div>
-    </div> 
-  </div>                                  
+      ) 
+  }
+
+
+const DayWeather = props => 
+{
+  return ( 
+    <div onClick={() => props.onClick(props.date)} className="weather-day">
+      <div className="week-day" >  
+        <div className="day">{getDayOfWeek(props.date)}</div>
+        <div className="weatherImg">
+          <img src={`https://openweathermap.org/img/w/${props.weather[0].icon}.png`}/>
+        </div>
+        <div className="temps">   
+          <div className="highTemp">{`${convertKelvinToCelsius(props.temps.temp_max)} °C`}</div>
+          <div className="lowTemp">{`${convertKelvinToCelsius(props.temps.temp_min)} °C`}</div>
+        </div>
+      </div>      
+    </div>
 )
+}
+
+
 
 export function App({ initialData }) {  
+  const [hrForecast, setHrForecast] = useState([]);
   const [wd, setWd] = useState([])
   const doSearch = (input) => {  
   setWd(WeatherData.list)
@@ -45,9 +67,15 @@ export function App({ initialData }) {
       console.log(error)
     }) */
   } 
- 
+  function setStuff(selectedDate){
+    let date = new Date(selectedDate)
+
+    //Weird
+    let dateString = `${date.getFullYear()}-0${date.getMonth()+1}-${date.getDate()}`    
+    setHrForecast(wd.filter(a => a.dt_txt.includes(dateString)))    
+  }
   return (
-    <div>              
+    <div >              
       <input id="search-input"></input>   
       <button onClick={ () => doSearch(document.getElementById("search-input").value)}>Search</button>
       <div className="foreCast">      
@@ -58,8 +86,16 @@ export function App({ initialData }) {
             hourlyWeather={wd}
             temps={p.main}
             date={p.dt_txt}
+            onClick={setStuff}
           />
         )}
+     </div>
+     <div className="hourlyForecast">
+     <div>       
+      <HourlyWeather
+        hourlyForecast={hrForecast}
+      />     
+    </div>  
      </div>
     </div>
   )
