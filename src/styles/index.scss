@@ -6,16 +6,24 @@
   margin-left: 5px;
   width: 50px;
   font-family: "Calibri";
-    border-style: solid;
-  border-width: 1px;
+/*     border-style: solid;
+  border-width: 1px; */
 }
 
 .weather-container{ 
   width: 500px;
   font-family: "Calibri";
-  border-style: solid;
-  border-width: 1px;
+/*   border-style: solid;
+  border-width: 1px; */
   display: inline-block;  
+  
+}
+
+.hour-weather{
+  display: "inline-block";
+  margin-top: 10px;
+/*   border-width: 1px;
+  border-style: solid */
   
 }
 
@@ -26,18 +34,23 @@
   padding-bottom: 2px;
   margin-left: 5px; */
   margin-top: 10px;
-  width: 200px;
+  width: 100px;
   font-family: "Calibri";
-  border-style: solid;
-  border-width: 1px;
+/*   border-style: solid;
+  border-width: 1px; */
 }
 
+
+
 .highTemp{
-  background-color: darkgrey
+  background-color: darkgrey;
+  width: 100%;
+  
 }
 
 .lowTemp{
-  background-color: lightgrey
+  background-color: lightgrey;
+  width: 100%;
 }
 
 .day{

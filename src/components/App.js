@@ -19,17 +19,29 @@ function convertKelvinToCelsius(kelvin) {
 
 const HourlyWeather = props =>{  
   return (  
-      <div>
-     { props.hourlyForecast.map(p =>    
-        <div >
-         <div>{getDayOfWeek(p.date)}</div>
-          <div>{`${convertKelvinToCelsius(p.main.temp_max)} °C`}</div>
-          <div>{`${convertKelvinToCelsius(p.main.temp_min)} °C`}</div>
-        </div>               
+      <div className="hour-weather-container" style={{width: "300px"}}>
+     {props.hourlyForecast.map(p =>    
+        <div className="hour-weather">        
+          <div className="day" style={{display: "inline-block", width: "100%"}}>{`${p.dt_txt}`}</div>
+          <div className="weatherImg">
+            <img src={`https://openweathermap.org/img/w/${p.weather[0].icon}.png`}/>
+          </div>
+          <div className="hour-temps" style={{display: "inline-block", width: "100%"}}>
+            <div className="highTemp">{`Temp: ${convertKelvinToCelsius(p.main.temp_max)} °C`}</div>            
+          </div>
+          </div>                      
       ) }
       </div>
       ) 
-  }
+}
+
+const HourlyForecastHeader = props => {
+
+  return (
+      <div>{`Hourly forecast in ${props.city}`}</div>
+  )
+
+}
 
 
 const DayWeather = props => 
@@ -89,6 +101,11 @@ export function App({ initialData }) {
             onClick={setStuff}
           />
         )}
+     </div>
+     <div>
+       <HourlyForecastHeader 
+        city={'London'}
+       />
      </div>
      <div className="hourlyForecast">
      <div>       
