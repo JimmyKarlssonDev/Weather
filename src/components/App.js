@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import WeatherData from "../Repository";
 const http = require('axios');
 
 function getDayOfWeek(date) {  
@@ -64,23 +63,21 @@ export function App({ initialData }) {
   const [hrForecast, setHrForecast] = useState([]);
   const [city, setCity] = useState('');
   const [wd, setWd] = useState([])
-  const doSearch = (input) => {  
-  setWd(WeatherData.list, input)
- /*  let url = `http://api.openweathermap.org/data/2.5/forecast?q=${input},us&mode=json&APPID=5abf3bbb00199842f7dd9cdeedfe56f0`
+  const doSearch = (input) => {    
+  let url = `http://api.openweathermap.org/data/2.5/forecast?q=${input},us&mode=json&APPID=5abf3bbb00199842f7dd9cdeedfe56f0`
   http.get(url)
-    .then(function(resp){
-      console.log('setWd')
+    .then(function(resp){      
       setWd(resp.data.list)
+      setCity(resp.data.city.name)
     })
     .catch(function(error){
-      console.log(error)
-    }) */
+      console.log(error) 
+    })
   } 
   function setStuff(selectedDate){
     let date = new Date(selectedDate)
     //Weird
     let dateString = `${date.getFullYear()}-0${date.getMonth()+1}-${date.getDate()}`    
-    setCity(document.getElementById("search-input").value)
     setHrForecast(wd.filter(a => a.dt_txt.includes(dateString)))    
   }
   return (
@@ -107,6 +104,7 @@ export function App({ initialData }) {
      <div className="hourlyForecast">
      <div>       
       <HourlyWeather
+        key={1}
         hourlyForecast={hrForecast}
       />     
     </div>  
